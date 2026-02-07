@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Divya 💖</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .box {
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    color: #fff;
+    backdrop-filter: blur(10px);
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  button {
+    padding: 14px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  #yesBtn {
+    background: #ff2f68;
+    color: white;
+  }
+
+  #noBtn {
+    background: white;
+    color: #ff2f68;
+    position: absolute;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .popup-content {
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    animation: pop 0.5s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .popup-content h2 {
+    color: #ff2f68;
+    font-size: 28px;
+  }
+
+  .emoji {
+    position: absolute;
+    font-size: 26px;
+    animation: fly 4s linear forwards;
+    z-index: 20;
+  }
+
+  @keyframes fly {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-300px); opacity: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>Will you be my girlfriend, Divya? 💖</h1>
+  <button id="yesBtn">YES 💕</button>
+</div>
+
+<button id="noBtn">NO 🙈</button>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h2>YEAHHHH 🎉💖</h2>
+    <p>
+      Congrats 🥰<br>
+      <strong>Sanjeev & Divya</strong><br>
+      are now officially together 💍✨<br><br>
+      ❤️ I LOVE YOU ❤️
+    </p>
+  </div>
+</div>
+
+<!-- Romantic Music -->
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const popup = document.getElementById("popup");
+  const bgMusic = document.getElementById("bgMusic");
+
+  let noClicks = 0;
+
+  function moveNoButton() {
+    noClicks++;
+    noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+
+    if (noClicks >= 3) {
+      setTimeout(showPopup, 500);
+    }
+  }
+
+  function showPopup() {
+    popup.style.display = "flex";
+    bgMusic.play();     // 🎵 Romantic music starts
+    startCelebration();
+  }
+
+  function startCelebration() {
+    const emojis = ["🎉","🎊","💋","❤️","💖","😍","🥰"];
+
+    for (let i = 0; i < 90; i++) {
+      const e = document.createElement("div");
+      e.className = "emoji";
+      e.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      e.style.left = Math.random() * 100 + "vw";
+      e.style.bottom = "0px";
+      e.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(e);
+
+      setTimeout(() => e.remove(), 5000);
+    }
+  }
+
+  noBtn.addEventListener("mouseover", moveNoButton);
+  noBtn.addEventListener("click", moveNoButton);
+  yesBtn.addEventListener("click", showPopup);
+</script>
+
+</body>
+</html>
